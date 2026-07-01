@@ -1,0 +1,67 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidebar -->
+  <mat-sidenav #sidenav mode="side" opened class="sidenav">
+    <div class="sidenav-header">
+      <mat-icon class="brand-icon">dashboard</mat-icon>
+      <span class="brand-title">Admin Panel</span>
+    </div>
+    
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let item of menuItems" [routerLink]="item.route" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: item.route === '/dashboard'}">
+        <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+        <span matListItemTitle>{{ item.label }}</span>
+      </a>
+      
+      <mat-divider></mat-divider>
+      
+      <a mat-list-item (click)="logout()" class="logout-link">
+        <mat-icon matListItemIcon color="warn">logout</mat-icon>
+        <span matListItemTitle color="warn">Logout</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main Content Area -->
+  <mat-sidenav-content class="content">
+    
+    <!-- Top Toolbar -->
+    <mat-toolbar color="primary" class="top-toolbar">
+      <button mat-icon-button (click)="sidenav.toggle()" aria-label="Toggle sidenav" class="menu-button">
+        <mat-icon>menu</mat-icon>
+      </button>
+      
+      <span>Dashboard</span>
+      
+      <span class="spacer"></span>
+      
+      <button mat-icon-button aria-label="Notifications">
+        <mat-icon>notifications</mat-icon>
+      </button>
+
+      <button mat-icon-button [matMenuTriggerFor]="profileMenu" aria-label="User profile">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item routerLink="/dashboard/profile">
+          <mat-icon>person</mat-icon>
+          <span>My Profile</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon color="warn">logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+
+    <!-- Routed Content -->
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>
