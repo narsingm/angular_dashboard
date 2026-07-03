@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Print GitHub Event
+        run: |
+          echo '${{ toJson(github.event) }}'
       - name: Trigger Playwright Repository
         run: |
           curl -L \
