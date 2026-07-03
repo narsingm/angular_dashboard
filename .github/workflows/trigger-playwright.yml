@@ -1,0 +1,16 @@
+name: Angular Workflow Test
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Workflow Started
+        run: echo "Angular GitHub Action is working!"
